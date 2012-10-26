@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp" >
+
+    <EditText
+        android:id="@+id/et_login_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:inputType="text|textEmailAddress"
+        android:hint="Username or email" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/et_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/et_login_username"
+        android:layout_below="@+id/et_login_username"
+        android:layout_marginTop="20dp"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btn_login_starttracking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/et_login_password"
+        android:layout_below="@+id/et_login_password"
+        android:layout_marginTop="20dp"
+        android:text="Start Tracking" />
+
+    <Button
+        android:id="@+id/btn_login_forgotpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btn_login_starttracking"
+        android:layout_marginTop="20dp"
+        android:text="Forgot your password?" />
+
+</RelativeLayout>
