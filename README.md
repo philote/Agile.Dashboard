@@ -1,4 +1,4 @@
-Agile.Dashboard
+Agile.Dashboard 
 ================
 
 Agile.Dashboard is an Android interface to the web application Pivotal Tracker: https://www.pivotaltracker.com
