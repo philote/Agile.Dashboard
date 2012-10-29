@@ -28,7 +28,7 @@
 package com.josephhopson.agiledashboard.adapters;
 
 import com.josephhopson.pivotal.tracker.dashboard.R;
-import com.josephhopson.agiledashboard.service.provider.TrackerServiceContract;
+import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -70,7 +70,7 @@ public class ActivitiesListAdapter extends CursorAdapter {
 		}
 		
 		String description  = cursor.getString(
-				cursor.getColumnIndex(TrackerServiceContract.RecentActivity.ACTIVITY_DESCRIPTION));
+				cursor.getColumnIndex(AgileDashboardServiceContract.RecentActivity.ACTIVITY_DESCRIPTION));
 		if(!TextUtils.isEmpty(description)) {
 			holder.description.setText(description);
 		} else {

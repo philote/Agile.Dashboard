@@ -27,15 +27,19 @@
  */
 package com.josephhopson.agiledashboard.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.josephhopson.agiledashboard.adapters.ActivitiesListAdapter;
-import com.josephhopson.agiledashboard.service.provider.TrackerServiceContract.RecentActivity;
+import com.josephhopson.agiledashboard.service.AgileDashboardServiceConstants;
+import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.RecentActivity;
 
 /**
  * RecentActivityListFragment.java
@@ -47,7 +51,7 @@ import com.josephhopson.agiledashboard.service.provider.TrackerServiceContract.R
 public class RecentActivityListFragment extends SherlockListFragment
 		implements LoaderManager.LoaderCallbacks<Cursor> {
 	
-	ActivitiesListAdapter mActivitiesListAdapter;
+	private ActivitiesListAdapter mActivitiesListAdapter;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +71,11 @@ public class RecentActivityListFragment extends SherlockListFragment
         // cause the same LoaderManager to be dealt to multiple 
         // fragments because their mIndex is -1 (haven't been added to 
         // the activity yet). Thus, we do this in onActivityCreated.
-        getLoaderManager().initLoader(0, null, this);
+        SharedPreferences mSharedPreferences = getActivity().getSharedPreferences(AgileDashboardServiceConstants.TOKEN_PREF, Context.MODE_PRIVATE);
+        String token = mSharedPreferences.getString(AgileDashboardServiceConstants.TOKEN_PREF_KEY, "");
+        if(!TextUtils.isEmpty(token)) {
+        	getLoaderManager().initLoader(0, null, this);
+        }
 	}
 
 	@Override
@@ -88,5 +96,12 @@ public class RecentActivityListFragment extends SherlockListFragment
 	public void onLoaderReset(Loader<Cursor> loader) {
 		mActivitiesListAdapter.changeCursor(null);
 	}
-
+	
+	public void refreshData() {
+		SharedPreferences mSharedPreferences = getActivity().getSharedPreferences(AgileDashboardServiceConstants.TOKEN_PREF, Context.MODE_PRIVATE);
+        String token = mSharedPreferences.getString(AgileDashboardServiceConstants.TOKEN_PREF_KEY, "");
+        if(!TextUtils.isEmpty(token)) {
+        	getLoaderManager().initLoader(0, null, this);
+        }
+	}
 }

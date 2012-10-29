@@ -36,8 +36,9 @@ import com.josephhopson.agiledashboard.fragments.SignInDialogFragment;
 import com.josephhopson.agiledashboard.interfaces.OnAuthTokenReceivedListener;
 import com.josephhopson.analytics.tracking.EasyTracker;
 import com.josephhopson.agiledashboard.service.R;
-import com.josephhopson.agiledashboard.service.TrackerServiceConstants;
+import com.josephhopson.agiledashboard.service.AgileDashboardServiceConstants;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 public class DashboardActivity extends BaseActivity implements
 		ActionBar.TabListener,
@@ -65,14 +69,13 @@ public class DashboardActivity extends BaseActivity implements
         
         EasyTracker.getTracker().setContext(this);
         
-        SharedPreferences mSharedPreferences = getSharedPreferences(TrackerServiceConstants.TOKEN_PREF, MODE_PRIVATE);
-        String token = mSharedPreferences.getString(TrackerServiceConstants.TOKEN_PREF_KEY, "");
+        SharedPreferences mSharedPreferences = getSharedPreferences(AgileDashboardServiceConstants.TOKEN_PREF, MODE_PRIVATE);
+        String token = mSharedPreferences.getString(AgileDashboardServiceConstants.TOKEN_PREF_KEY, "");
         if(TextUtils.isEmpty(token)) {
         	Log.d(getClass().getName(), "No Token in shared prefs");
         	showSignInDialog();
-        } else {
-        	loadFragments();
         }
+        loadFragments();
     }
     
     private void loadFragments() {
@@ -167,8 +170,13 @@ public class DashboardActivity extends BaseActivity implements
 	public void authTokenReceived(String errorMessage) {
     	if(!TextUtils.isEmpty(errorMessage)) {
     		Log.d(getClass().getName(), errorMessage);
+    		Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show();
+    		// TODO pop dialog
+    	} else {
+    		// TODO update fragments
+    		mProjectsListFragment.refreshData();
+    		mRecentActivityListFragment.refreshData();
     	}
-    	loadFragments();
 	}
     
     // Helper functions

@@ -24,15 +24,15 @@
         </activity>
         
 		<provider
-			android:name="com.josephhopson.pivotal.tracker.service.provider.TrackerServiceProvider"
+			android:name="com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceProvider"
 			android:authorities="com.josephhopson.pivotal.tracker.service"
 			android:exported="false"
 			android:multiprocess="true" >
 		</provider>
 		
-		<service android:name="com.josephhopson.pivotal.tracker.service.projects.ProjectsIntentService"></service>
-		<service android:name="com.josephhopson.pivotal.tracker.service.recentactivity.RecentActivityIntentService"></service>
-		<service android:name="com.josephhopson.pivotal.tracker.service.authentication.AuthenticationIntentService"></service>
+		<service android:name="com.josephhopson.agiledashboard.service.projects.ProjectsIntentService"></service>
+		<service android:name="com.josephhopson.agiledashboard.service.recentactivity.RecentActivityIntentService"></service>
+		<service android:name="com.josephhopson.agiledashboard.service.authentication.AuthenticationIntentService"></service>
 		
     </application>
 </manifest>

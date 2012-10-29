@@ -34,16 +34,22 @@ import com.josephhopson.pivotal.tracker.dashboard.R;
 import com.josephhopson.agiledashboard.service.authentication.*;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.app.Service;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -59,6 +65,8 @@ public class SignInDialogFragment extends DialogFragment implements OnClickListe
 	
 	private static final String DIALOG_TITLE = "Sign In";
 	
+	ProgressDialog dialog;
+	
 	private EditText et_Username;
 	private EditText et_Password;
 	private Button btn_StartTracking;
@@ -70,20 +78,23 @@ public class SignInDialogFragment extends DialogFragment implements OnClickListe
 	public SignInDialogFragment() {}
 	
 	 @Override
-	    public void onAttach(Activity activity) {
-	        super.onAttach(activity);
-	        try {
-	        	mOnAuthTokenReceivedListener = (OnAuthTokenReceivedListener) activity;
-	        } catch (ClassCastException e) {
-	            throw new ClassCastException(activity.toString() 
-	            		+ " must implement Listeners");
-	        }
+	 public void onAttach(Activity activity) {
+		 super.onAttach(activity);
+		 try {
+			 mOnAuthTokenReceivedListener = (OnAuthTokenReceivedListener) activity;
+		 } catch (ClassCastException e) {
+			 throw new ClassCastException(activity.toString() 
+					 + " must implement Listeners");
+		 }
 	 }
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        dialog = new ProgressDialog(getActivity());
+		dialog.setIndeterminate(true);
+		dialog.setMessage("Logging you in.");
 	}
 	
 	@Override
@@ -103,7 +114,15 @@ public class SignInDialogFragment extends DialogFragment implements OnClickListe
 		
 		return mView;
 	}
-
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		et_Username.requestFocus();
+		et_Username.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, 0, 0, 0));
+		et_Username.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, 0, 0, 0));
+	}
+	
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
@@ -134,7 +153,7 @@ public class SignInDialogFragment extends DialogFragment implements OnClickListe
 							new AuthenticationHandler(this));
 					et_Username.setText("");
 					et_Password.setText("");
-					// TODO set spinner
+					dialog.show();
 					Log.d(getClass().getName(), "Atempting to sign the user in.");
 					Toast.makeText(getActivity().getApplicationContext(), "Atempting to sign you in.", Toast.LENGTH_SHORT).show();
 				}
@@ -148,8 +167,16 @@ public class SignInDialogFragment extends DialogFragment implements OnClickListe
 	}
 	
 	public void sendResponceToActivity(String error) {
+		if(dialog.isShowing()) {
+			dialog.dismiss();
+		}
 		mOnAuthTokenReceivedListener.authTokenReceived(error);
-		dismiss();
+		if(TextUtils.isEmpty(error)) {
+			dismiss();
+		} else {
+			et_Username.setText("");
+			et_Password.setText("");
+		}
 	}
 	
 	

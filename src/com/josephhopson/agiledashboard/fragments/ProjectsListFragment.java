@@ -27,16 +27,20 @@
  */
 package com.josephhopson.agiledashboard.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
 import com.josephhopson.agiledashboard.adapters.ProjectsListAdapter;
-import com.josephhopson.agiledashboard.service.provider.TrackerServiceContract.Projects;
+import com.josephhopson.agiledashboard.service.AgileDashboardServiceConstants;
+import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.Projects;
 
 /**
  * ProjectsListFragment.java
@@ -48,7 +52,7 @@ import com.josephhopson.agiledashboard.service.provider.TrackerServiceContract.P
 public class ProjectsListFragment extends SherlockListFragment 
 		implements LoaderManager.LoaderCallbacks<Cursor> {
 	
-	ProjectsListAdapter mProjectsListAdapter;
+	private ProjectsListAdapter mProjectsListAdapter;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,12 +67,16 @@ public class ProjectsListFragment extends SherlockListFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         
-        // In support library r8, calling initLoader for a fragment 
+		// In support library r8, calling initLoader for a fragment 
         // in a FragmentPagerAdapter in the fragment's onCreate may   
         // cause the same LoaderManager to be dealt to multiple 
         // fragments because their mIndex is -1 (haven't been added to 
         // the activity yet). Thus, we do this in onActivityCreated.
-        getLoaderManager().initLoader(0, null, this);
+        SharedPreferences mSharedPreferences = getActivity().getSharedPreferences(AgileDashboardServiceConstants.TOKEN_PREF, Context.MODE_PRIVATE);
+        String token = mSharedPreferences.getString(AgileDashboardServiceConstants.TOKEN_PREF_KEY, "");
+        if(!TextUtils.isEmpty(token)) {
+        	getLoaderManager().initLoader(0, null, this);
+        }
 	}
 
 	@Override
@@ -91,4 +99,11 @@ public class ProjectsListFragment extends SherlockListFragment
 		mProjectsListAdapter.changeCursor(null);
 	}
 
+	public void refreshData() {
+		SharedPreferences mSharedPreferences = getActivity().getSharedPreferences(AgileDashboardServiceConstants.TOKEN_PREF, Context.MODE_PRIVATE);
+        String token = mSharedPreferences.getString(AgileDashboardServiceConstants.TOKEN_PREF_KEY, "");
+        if(!TextUtils.isEmpty(token)) {
+        	getLoaderManager().initLoader(0, null, this);
+        }
+	}
 }
