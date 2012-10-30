@@ -48,16 +48,8 @@ import android.widget.TextView;
  */
 public class ProjectsListAdapter extends CursorAdapter {
 	
-	private LayoutInflater inflater;
-	// TODO get from string.xml
-	private static final String PROJECT_NAME = "Project Name";
-	
-	/**
-	 * @param context
-	 */
 	public ProjectsListAdapter(Context context) {
 		super(context, null, 0);
-		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 	
 	@Override
@@ -74,18 +66,19 @@ public class ProjectsListAdapter extends CursorAdapter {
 			holder.name.setText(name);
 		} else {
 			// reset
-			holder.name.setText(PROJECT_NAME);
+			holder.name.setText(context.getString(R.string.project_name));
 		}
 	}
 	
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-		View view = inflater.inflate(R.layout.projects_list_item, null);
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view = inflater.inflate(R.layout.projects_list_item, viewGroup, false);
 		bindView(view, context, cursor);
 		return view;
 	}
 	
-	class ViewHolder{
+	class ViewHolder {
 		TextView name;
 	}
 

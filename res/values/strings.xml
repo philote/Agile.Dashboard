@@ -15,5 +15,6 @@
     <!-- place holder stings -->
     <string name="activity_description">Activity Description</string>
     <string name="project_name">Project Name</string>
+    <string name="story_name">Story Name</string>
     
 </resources>

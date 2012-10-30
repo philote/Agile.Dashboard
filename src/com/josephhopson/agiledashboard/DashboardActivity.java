@@ -83,7 +83,9 @@ public class DashboardActivity extends BaseActivity implements
     }
 
     
-    //-----
+    // ----------------------
+ 	// Menu functions
+ 	// ----------------------
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,7 +113,9 @@ public class DashboardActivity extends BaseActivity implements
     }
     
     
-    //-----
+    // ----------------------
+ 	// Pager functions
+ 	// ----------------------
     
     @Override
     public void onPageSelected(int position) {
@@ -148,7 +152,9 @@ public class DashboardActivity extends BaseActivity implements
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
     
     
-    //----
+    // ----------------------
+ 	// Authentication functions
+ 	// ----------------------
     
     @Override
 	public void authTokenReceived(String errorMessage) {
@@ -164,7 +170,9 @@ public class DashboardActivity extends BaseActivity implements
 	}
     
     
-    // Helper functions
+    // ----------------------
+ 	// Helper functions
+ 	// ----------------------
     
     private void loadFragments() {
     	mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -196,6 +204,11 @@ public class DashboardActivity extends BaseActivity implements
         SignInDialogFragment mLoginDialogFragment = new SignInDialogFragment();
         mLoginDialogFragment.show(fm, "fragment_sign_in");
     }
+    
+    
+    // ----------------------
+ 	// Pager Adapter Object
+ 	// ----------------------
     
     /**
      * DashboardPagerAdapter

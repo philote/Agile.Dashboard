@@ -37,9 +37,7 @@ import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.josephhopson.agiledashboard.fragments.BacklogListFragment;
-import com.josephhopson.agiledashboard.fragments.CurrentListFragment;
-import com.josephhopson.agiledashboard.fragments.IceboxListFragment;
+import com.josephhopson.agiledashboard.fragments.StoriesListFragment;
 import com.josephhopson.agiledashboard.service.R;
 import com.josephhopson.analytics.tracking.EasyTracker;
 
@@ -56,9 +54,9 @@ public class ProjectActivity extends BaseActivity implements
 
 	private ViewPager mViewPager;
 	
-	CurrentListFragment mCurrentListFragment;
-	BacklogListFragment mBacklogListFragment;
-	IceboxListFragment mIceboxListFragment;
+	private StoriesListFragment mCurrentListFragment;
+	private StoriesListFragment mBacklogListFragment;
+	private StoriesListFragment mIceboxListFragment;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,9 @@ public class ProjectActivity extends BaseActivity implements
 	}
 	
 	
-	//----
+    // ----------------------
+ 	// Menu functions
+ 	// ----------------------
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,7 +99,9 @@ public class ProjectActivity extends BaseActivity implements
     }
     
     
-    //-----
+    // ----------------------
+ 	// Pager functions
+ 	// ----------------------
     
     @Override
     public void onPageSelected(int position) {
@@ -139,7 +141,9 @@ public class ProjectActivity extends BaseActivity implements
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
     
 
-    // Helper functions
+    // ----------------------
+ 	// Helper functions
+ 	// ----------------------
     
 	private void loadFragments() {
     	mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -162,14 +166,16 @@ public class ProjectActivity extends BaseActivity implements
     	} else {
         	// Tablet setup
     		FragmentManager fm = getSupportFragmentManager();
-    		mCurrentListFragment = (CurrentListFragment) fm.findFragmentById(R.id.fragment_current);
-    		mBacklogListFragment = (BacklogListFragment) fm.findFragmentById(R.id.fragment_backlog);
-    		mIceboxListFragment  = (IceboxListFragment) fm.findFragmentById(R.id.fragment_icebox);
+    		mCurrentListFragment = (StoriesListFragment) fm.findFragmentById(R.id.fragment_current);
+    		mBacklogListFragment = (StoriesListFragment) fm.findFragmentById(R.id.fragment_backlog);
+    		mIceboxListFragment  = (StoriesListFragment) fm.findFragmentById(R.id.fragment_icebox);
     	}
 	}
     
     
-	//----
+    // ----------------------
+ 	// Pager Adapter Object
+ 	// ----------------------
 	
 	/**
      * DashboardPagerAdapter
@@ -186,11 +192,11 @@ public class ProjectActivity extends BaseActivity implements
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                	 return (mCurrentListFragment = new CurrentListFragment());
+                	 return (mCurrentListFragment = new StoriesListFragment());
                 case 1:
-                	 return (mBacklogListFragment = new BacklogListFragment());
+                	 return (mBacklogListFragment = new StoriesListFragment());
                 case 2:
-                	 return (mIceboxListFragment = new IceboxListFragment());
+                	 return (mIceboxListFragment = new StoriesListFragment());
             }
             return null;
         }
