@@ -52,6 +52,13 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+/**
+ * DashboardActivity.java
+ * Purpose: 
+ * 
+ * @author "Joseph T. Hopson"
+ * @version 1.0 Oct 13, 2012
+ */
 public class DashboardActivity extends BaseActivity implements
 		ActionBar.TabListener,
 		ViewPager.OnPageChangeListener, 
