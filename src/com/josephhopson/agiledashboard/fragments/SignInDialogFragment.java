@@ -30,7 +30,7 @@ package com.josephhopson.agiledashboard.fragments;
 import java.lang.ref.WeakReference;
 
 import com.josephhopson.agiledashboard.interfaces.OnAuthTokenReceivedListener;
-import com.josephhopson.pivotal.tracker.dashboard.R;
+import com.josephhopson.agiledashboard.R;
 import com.josephhopson.agiledashboard.service.authentication.*;
 
 import android.app.Activity;

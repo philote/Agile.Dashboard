@@ -27,7 +27,7 @@
  */
 package com.josephhopson.agiledashboard.adapters;
 
-import com.josephhopson.pivotal.tracker.dashboard.R;
+import com.josephhopson.agiledashboard.R;
 import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract;
 
 import android.content.Context;
