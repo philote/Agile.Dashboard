@@ -28,13 +28,18 @@
 package com.josephhopson.agiledashboard;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.josephhopson.agiledashboard.fragments.BacklogListFragment;
+import com.josephhopson.agiledashboard.fragments.CurrentListFragment;
+import com.josephhopson.agiledashboard.fragments.IceboxListFragment;
 import com.josephhopson.agiledashboard.service.R;
 import com.josephhopson.analytics.tracking.EasyTracker;
 
@@ -51,6 +56,10 @@ public class ProjectActivity extends BaseActivity implements
 
 	private ViewPager mViewPager;
 	
+	CurrentListFragment mCurrentListFragment;
+	BacklogListFragment mBacklogListFragment;
+	IceboxListFragment mIceboxListFragment;
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,31 +70,6 @@ public class ProjectActivity extends BaseActivity implements
         loadFragments();
 	}
 	
-	private void loadFragments() {
-    	mViewPager = (ViewPager) findViewById(R.id.pager);
-    	if (mViewPager != null) {
-    		// Phone setup
-    		/*
-    		 * mViewPager.setAdapter(new HomePagerAdapter(getSupportFragmentManager()));
-            mViewPager.setOnPageChangeListener(this);
-    		 */
-    		
-    		final ActionBar actionBar = getSupportActionBar();
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-            actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.tab_title_current)
-                    .setTabListener(this));
-            actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.tab_title_backlog)
-                    .setTabListener(this));
-            actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.tab_title_icebox)
-                    .setTabListener(this));
-    	} else {
-        	// Tablet setup
-    		
-    	}
-	}
 	
 	//----
 	
@@ -114,42 +98,106 @@ public class ProjectActivity extends BaseActivity implements
         return super.onOptionsItemSelected(item);
     }
     
+    
     //-----
+    
+    @Override
+    public void onPageSelected(int position) {
+        getSupportActionBar().setSelectedNavigationItem(position);
+        
+        int titleId = -1;
+        switch (position) {
+            case 0:
+                titleId = R.string.tab_title_current;
+                break;
+            case 1:
+                titleId = R.string.tab_title_backlog;
+                break;
+            case 2:
+                titleId = R.string.tab_title_icebox;
+                break;
+        }
+        
+        EasyTracker.getTracker().trackView(getString(titleId));
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {}
 
 	@Override
-	public void onPageScrollStateChanged(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void onPageScrolled(int i, float v, int i1) {}
 
 	@Override
-	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        mViewPager.setCurrentItem(tab.getPosition());
+    }
 
 	@Override
-	public void onPageSelected(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
 
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
+    
 
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
+    // Helper functions
+    
+	private void loadFragments() {
+    	mViewPager = (ViewPager) findViewById(R.id.pager);
+    	if (mViewPager != null) {
+    		// Phone setup
+    		mViewPager.setAdapter(new ProjectPagerAdapter(getSupportFragmentManager()));
+            mViewPager.setOnPageChangeListener(this);
+    		
+    		final ActionBar actionBar = getSupportActionBar();
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            actionBar.addTab(actionBar.newTab()
+                    .setText(R.string.tab_title_current)
+                    .setTabListener(this));
+            actionBar.addTab(actionBar.newTab()
+                    .setText(R.string.tab_title_backlog)
+                    .setTabListener(this));
+            actionBar.addTab(actionBar.newTab()
+                    .setText(R.string.tab_title_icebox)
+                    .setTabListener(this));
+    	} else {
+        	// Tablet setup
+    		FragmentManager fm = getSupportFragmentManager();
+    		mCurrentListFragment = (CurrentListFragment) fm.findFragmentById(R.id.fragment_current);
+    		mBacklogListFragment = (BacklogListFragment) fm.findFragmentById(R.id.fragment_backlog);
+    		mIceboxListFragment  = (IceboxListFragment) fm.findFragmentById(R.id.fragment_icebox);
+    	}
 	}
+    
+    
+	//----
+	
+	/**
+     * DashboardPagerAdapter
+     * Purpose: 
+     * 
+     */
+    private class ProjectPagerAdapter extends FragmentPagerAdapter {
+    	
+        public ProjectPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		
-	}
-
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                	 return (mCurrentListFragment = new CurrentListFragment());
+                case 1:
+                	 return (mBacklogListFragment = new BacklogListFragment());
+                case 2:
+                	 return (mIceboxListFragment = new IceboxListFragment());
+            }
+            return null;
+        }
+        
+        @Override
+        public int getCount() {
+            return 3;
+        }
+    }
 }

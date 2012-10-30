@@ -38,7 +38,6 @@ import com.josephhopson.analytics.tracking.EasyTracker;
 import com.josephhopson.agiledashboard.service.R;
 import com.josephhopson.agiledashboard.service.AgileDashboardServiceConstants;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -48,8 +47,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 /**
@@ -84,31 +81,9 @@ public class DashboardActivity extends BaseActivity implements
         }
         loadFragments();
     }
+
     
-    private void loadFragments() {
-    	mViewPager = (ViewPager) findViewById(R.id.pager);
-        if (mViewPager != null) {
-        	// Phone setup
-        	mViewPager.setAdapter(new HomePagerAdapter(getSupportFragmentManager()));
-            mViewPager.setOnPageChangeListener(this);
-            
-            final ActionBar actionBar = getSupportActionBar();
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-            actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.title_projects_list)
-                    .setTabListener(this));
-            actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.title_activity_feed)
-                    .setTabListener(this));
-        } else {
-        	// Tablet setup
-        	FragmentManager fm = getSupportFragmentManager();
-        	mRecentActivityListFragment = (RecentActivityListFragment) 
-        			fm.findFragmentById(R.id.fragment_recent_activites);
-        	mProjectsListFragment = (ProjectsListFragment) 
-        			fm.findFragmentById(R.id.fragment_projects);
-        }
-    }
+    //-----
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -135,6 +110,9 @@ public class DashboardActivity extends BaseActivity implements
         return super.onOptionsItemSelected(item);
     }
     
+    
+    //-----
+    
     @Override
     public void onPageSelected(int position) {
         getSupportActionBar().setSelectedNavigationItem(position);
@@ -153,12 +131,10 @@ public class DashboardActivity extends BaseActivity implements
     }
 
     @Override
-    public void onPageScrollStateChanged(int i) {
-    }
+    public void onPageScrollStateChanged(int i) {}
 
 	@Override
-    public void onPageScrolled(int i, float v, int i1) {
-    }
+    public void onPageScrolled(int i, float v, int i1) {}
 
 	@Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
@@ -166,12 +142,13 @@ public class DashboardActivity extends BaseActivity implements
     }
 
 	@Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-    }
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
 
     @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-    }
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
+    
+    
+    //----
     
     @Override
 	public void authTokenReceived(String errorMessage) {
@@ -186,7 +163,33 @@ public class DashboardActivity extends BaseActivity implements
     	}
 	}
     
+    
     // Helper functions
+    
+    private void loadFragments() {
+    	mViewPager = (ViewPager) findViewById(R.id.pager);
+        if (mViewPager != null) {
+        	// Phone setup
+        	mViewPager.setAdapter(new DashboardPagerAdapter(getSupportFragmentManager()));
+            mViewPager.setOnPageChangeListener(this);
+            
+            final ActionBar actionBar = getSupportActionBar();
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            actionBar.addTab(actionBar.newTab()
+                    .setText(R.string.title_projects_list)
+                    .setTabListener(this));
+            actionBar.addTab(actionBar.newTab()
+                    .setText(R.string.title_activity_feed)
+                    .setTabListener(this));
+        } else {
+        	// Tablet setup
+        	FragmentManager fm = getSupportFragmentManager();
+        	mRecentActivityListFragment = (RecentActivityListFragment) 
+        			fm.findFragmentById(R.id.fragment_recent_activites);
+        	mProjectsListFragment = (ProjectsListFragment) 
+        			fm.findFragmentById(R.id.fragment_projects);
+        }
+    }
     
     private void showSignInDialog() {
         FragmentManager fm = getSupportFragmentManager();
@@ -195,13 +198,13 @@ public class DashboardActivity extends BaseActivity implements
     }
     
     /**
-     * HomePagerAdapter
+     * DashboardPagerAdapter
      * Purpose: 
      * 
      */
-    private class HomePagerAdapter extends FragmentPagerAdapter {
+    private class DashboardPagerAdapter extends FragmentPagerAdapter {
     	
-        public HomePagerAdapter(FragmentManager fm) {
+        public DashboardPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
