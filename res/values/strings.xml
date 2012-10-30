@@ -6,6 +6,11 @@
     <string name="title_activity_dashboard">Dashboard</string>
     <string name="title_projects_list">Projects</string>
     <string name="title_activity_feed">Recent Activity</string>
+    
+    <string name="tab_title_current">Current</string>
+    <string name="tab_title_backlog">Backlog</string>
+    <string name="tab_title_icebox">Icebox</string>
+    <string name="tab_title_done">Done</string>
 	
     <!-- place holder stings -->
     <string name="activity_description">Activity Description</string>

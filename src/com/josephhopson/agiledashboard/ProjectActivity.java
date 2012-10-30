@@ -27,6 +27,17 @@
  */
 package com.josephhopson.agiledashboard;
 
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.josephhopson.agiledashboard.service.R;
+import com.josephhopson.analytics.tracking.EasyTracker;
+
 /**
  * ProjectActivity.java
  * Purpose: 
@@ -34,11 +45,111 @@ package com.josephhopson.agiledashboard;
  * @author "Joseph T. Hopson"
  * @version 1.0 Oct 29, 2012
  */
-public class ProjectActivity extends BaseActivity {
+public class ProjectActivity extends BaseActivity implements
+		ActionBar.TabListener,
+		ViewPager.OnPageChangeListener {
 
+	private ViewPager mViewPager;
 	
-	public ProjectActivity() {
-		// TODO Auto-generated constructor stub
+	@Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_project);
+        
+        EasyTracker.getTracker().setContext(this);
+        
+        loadFragments();
+	}
+	
+	private void loadFragments() {
+    	mViewPager = (ViewPager) findViewById(R.id.pager);
+    	if (mViewPager != null) {
+    		// Phone setup
+    		/*
+    		 * mViewPager.setAdapter(new HomePagerAdapter(getSupportFragmentManager()));
+            mViewPager.setOnPageChangeListener(this);
+    		 */
+    		
+    		final ActionBar actionBar = getSupportActionBar();
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            actionBar.addTab(actionBar.newTab()
+                    .setText(R.string.tab_title_current)
+                    .setTabListener(this));
+            actionBar.addTab(actionBar.newTab()
+                    .setText(R.string.tab_title_backlog)
+                    .setTabListener(this));
+            actionBar.addTab(actionBar.newTab()
+                    .setText(R.string.tab_title_icebox)
+                    .setTabListener(this));
+    	} else {
+        	// Tablet setup
+    		
+    	}
+	}
+	
+	//----
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        
+        // TODO add menu layout here
+        // getSupportMenuInflater().inflate(R.menu.home, menu);
+        
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        	// TODO add menu case's here
+//		    case R.id.menu_refresh:
+//		        triggerRefresh();
+//		        return true;
+//		    case R.id.menu_sign_out:
+//		        AccountUtils.signOut(this);
+//		        finish();
+//		        return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    
+    //-----
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
