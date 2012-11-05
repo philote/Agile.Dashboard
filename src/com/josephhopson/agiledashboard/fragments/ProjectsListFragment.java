@@ -28,6 +28,7 @@
 package com.josephhopson.agiledashboard.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -35,9 +36,12 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
+import com.josephhopson.agiledashboard.ProjectActivity;
 import com.josephhopson.agiledashboard.adapters.ProjectsListAdapter;
 import com.josephhopson.agiledashboard.service.AgileDashboardServiceConstants;
 import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.Projects;
@@ -72,11 +76,22 @@ public class ProjectsListFragment extends SherlockListFragment
         // cause the same LoaderManager to be dealt to multiple 
         // fragments because their mIndex is -1 (haven't been added to 
         // the activity yet). Thus, we do this in onActivityCreated.
-        SharedPreferences mSharedPreferences = getActivity().getSharedPreferences(AgileDashboardServiceConstants.TOKEN_PREF, Context.MODE_PRIVATE);
+        SharedPreferences mSharedPreferences = getActivity().getSharedPreferences(
+        		AgileDashboardServiceConstants.TOKEN_PREF, Context.MODE_PRIVATE);
         String token = mSharedPreferences.getString(AgileDashboardServiceConstants.TOKEN_PREF_KEY, "");
         if(!TextUtils.isEmpty(token)) {
         	getLoaderManager().initLoader(0, null, this);
         }
+	}
+	
+	@Override
+	public void onListItemClick(ListView listView, View view, int position, long id) {
+		Intent intent = new Intent(getActivity(), ProjectActivity.class);
+		mProjectsListAdapter.getCursor().moveToPosition(position);
+		String projectId = mProjectsListAdapter.getCursor().getString(
+				mProjectsListAdapter.getCursor().getColumnIndex(Projects.PROJECT_ID));
+		intent.putExtra(ProjectActivity.PROJECT_ID_KEY, projectId);
+		startActivity(intent);
 	}
 
 	@Override

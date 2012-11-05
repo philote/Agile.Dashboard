@@ -51,7 +51,9 @@ import com.josephhopson.analytics.tracking.EasyTracker;
 public class ProjectActivity extends BaseActivity implements
 		ActionBar.TabListener,
 		ViewPager.OnPageChangeListener {
-
+	
+	public static final String PROJECT_ID_KEY = "com.josephhopson.agiledashboard.ProjectActivity.projectidkey";
+	
 	private ViewPager mViewPager;
 	
 	private StoriesListFragment mCurrentListFragment;
@@ -62,6 +64,8 @@ public class ProjectActivity extends BaseActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
+        
+        String projectId = getIntent().getExtras().getString(PROJECT_ID_KEY);
         
         EasyTracker.getTracker().setContext(this);
         
@@ -166,9 +170,12 @@ public class ProjectActivity extends BaseActivity implements
     	} else {
         	// Tablet setup
     		FragmentManager fm = getSupportFragmentManager();
-    		mCurrentListFragment = (StoriesListFragment) fm.findFragmentById(R.id.fragment_current);
-    		mBacklogListFragment = (StoriesListFragment) fm.findFragmentById(R.id.fragment_backlog);
-    		mIceboxListFragment  = (StoriesListFragment) fm.findFragmentById(R.id.fragment_icebox);
+//    		mCurrentListFragment = (StoriesListFragment) fm.findFragmentById(R.id.fragment_current);
+    		mCurrentListFragment = StoriesListFragment.newInstance("");
+//    		mBacklogListFragment = (StoriesListFragment) fm.findFragmentById(R.id.fragment_backlog);
+    		mBacklogListFragment = StoriesListFragment.newInstance("");
+//    		mIceboxListFragment  = (StoriesListFragment) fm.findFragmentById(R.id.fragment_icebox);
+    		mIceboxListFragment = StoriesListFragment.newInstance("");
     	}
 	}
     

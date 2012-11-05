@@ -23,10 +23,11 @@
             android:layout_weight="1"
             android:layout_margin="@dimen/multipane_half_padding"
             android:background="@android:color/darker_gray">
-            <fragment android:name="com.josephhopson.agiledashboard.fragments.CurrentListFragment"
-                android:id="@+id/fragment_current"
+            
+            <FrameLayout android:id="@+id/fragment_current"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+            
         </FrameLayout>
     </LinearLayout>
     
@@ -48,10 +49,11 @@
             android:layout_weight="1"
             android:layout_margin="@dimen/multipane_half_padding"
             android:background="@android:color/darker_gray">
-            <fragment android:name="com.josephhopson.agiledashboard.fragments.BacklogListFragment"
-                android:id="@+id/fragment_backlog"
+            
+            <FrameLayout android:id="@+id/fragment_backlog"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+            
         </FrameLayout>
     </LinearLayout>
     
@@ -73,10 +75,11 @@
             android:layout_weight="1"
             android:layout_margin="@dimen/multipane_half_padding"
             android:background="@android:color/darker_gray">
-            <fragment android:name="com.josephhopson.agiledashboard.fragments.IceboxListFragment"
-                android:id="@+id/fragment_icebox"
+            
+            <FrameLayout android:id="@+id/fragment_icebox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+            
         </FrameLayout>
     </LinearLayout>
 
