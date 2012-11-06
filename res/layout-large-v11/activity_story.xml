@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:padding="@dimen/multipane_half_padding">
+
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/multipane_half_padding"
+            android:layout_marginTop="@dimen/multipane_half_padding"
+            android:layout_marginRight="@dimen/multipane_half_padding"
+            android:text="@string/title_projects_list" />
+
+        <FrameLayout android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/multipane_half_padding"
+            android:background="@android:color/darker_gray">
+            
+            <FrameLayout android:id="@+id/fragment_story"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            
+        </FrameLayout>
+    </LinearLayout>
+    
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/multipane_half_padding"
+            android:layout_marginTop="@dimen/multipane_half_padding"
+            android:layout_marginRight="@dimen/multipane_half_padding"
+            android:text="@string/title_activity_feed" />
+
+        <FrameLayout android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/multipane_half_padding"
+            android:background="@android:color/darker_gray">
+            
+            <FrameLayout android:id="@+id/fragment_tasks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            
+        </FrameLayout>
+    </LinearLayout>
+    
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/multipane_half_padding"
+            android:layout_marginTop="@dimen/multipane_half_padding"
+            android:layout_marginRight="@dimen/multipane_half_padding"
+            android:text="@string/title_activity_feed" />
+
+        <FrameLayout android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/multipane_half_padding"
+            android:background="@android:color/darker_gray">
+            
+            <FrameLayout android:id="@+id/fragment_attachments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

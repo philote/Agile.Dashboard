@@ -1,30 +1,3 @@
-/*
- * Copyright © 2012 Joseph Hopson
- * 
- * This file is part of Agile.Dashboard.
- * 
- * This software is dual-licensed:
- * Agile.Dashboard is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * Agile.Dashboard is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with Agile.Dashboard.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Alternatively, you can be released from the requirements of the license 
- * by purchasing a commercial license. Buying such a license is mandatory 
- * as soon as you develop commercial activities involving the Agile.Dashboard 
- * software without disclosing the source code of your own applications.
- * 
- * For more information, please contact Joseph Hopson. at the following
- * address: sales@josephhopson.com
- */
 package com.josephhopson.agiledashboard;
 
 import android.os.Bundle;
@@ -37,29 +10,33 @@ import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.josephhopson.agiledashboard.fragments.StoriesListFragment;
+import com.josephhopson.agiledashboard.fragments.AttachmentsListFragment;
+import com.josephhopson.agiledashboard.fragments.StoryFragment;
+import com.josephhopson.agiledashboard.fragments.TasksListFragment;
 import com.josephhopson.agiledashboard.service.R;
 import com.josephhopson.analytics.tracking.EasyTracker;
 
 /**
- * ProjectActivity.java
- * Purpose: 
+ * StoryActivity.java
+ * Purpose:
  * 
- * @author "Joseph T. Hopson"
- * @version 1.0 Oct 29, 2012
+ * @author Joseph Hopson
+ * @version 1.0 Nov 6, 2012
  */
-public class ProjectActivity extends BaseActivity implements
+public class StoryActivity extends BaseActivity implements
 		ActionBar.TabListener,
 		ViewPager.OnPageChangeListener {
 	
-	public static final String PROJECT_ID_KEY = "com.josephhopson.agiledashboard.ProjectActivity.projectidkey";
+	public static final String STORY_ID_KEY = "com.josephhopson.agiledashboard.ProjectActivity.storyidkey";
+	public static final String STORY_PROJECT_ID_KEY = "com.josephhopson.agiledashboard.ProjectActivity.storyprojectidkey";
 	
 	private ViewPager mViewPager;
 	
-	private StoriesListFragment mCurrentListFragment;
-	private StoriesListFragment mBacklogListFragment;
-	private StoriesListFragment mIceboxListFragment;
+	private StoryFragment mStoryFragment;
+	private TasksListFragment mTasksListFragment;
+	private AttachmentsListFragment mAttachmentsListFragment;
 	
+	private String storyId;
 	private String projectId;
 	
 	@Override
@@ -67,13 +44,14 @@ public class ProjectActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
         
-        projectId = getIntent().getExtras().getString(PROJECT_ID_KEY);
+        storyId = getIntent().getExtras().getString(STORY_ID_KEY);
+        projectId = getIntent().getExtras().getString(STORY_PROJECT_ID_KEY);
         
         EasyTracker.getTracker().setContext(this);
         
         loadFragments();
 	}
-	
+
 	
     // ----------------------
  	// Menu functions
@@ -103,7 +81,7 @@ public class ProjectActivity extends BaseActivity implements
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
     
     // ----------------------
  	// Pager functions
@@ -116,13 +94,13 @@ public class ProjectActivity extends BaseActivity implements
         int titleId = -1;
         switch (position) {
             case 0:
-                titleId = R.string.tab_title_current;
+                titleId = R.string.tab_title_story;
                 break;
             case 1:
-                titleId = R.string.tab_title_backlog;
+                titleId = R.string.tab_title_tasks;
                 break;
             case 2:
-                titleId = R.string.tab_title_icebox;
+                titleId = R.string.tab_title_attachments;
                 break;
         }
         
@@ -145,7 +123,7 @@ public class ProjectActivity extends BaseActivity implements
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
-    
+	 
 
     // ----------------------
  	// Helper functions
@@ -155,47 +133,47 @@ public class ProjectActivity extends BaseActivity implements
     	mViewPager = (ViewPager) findViewById(R.id.pager);
     	if (mViewPager != null) {
     		// Phone setup
-    		mViewPager.setAdapter(new ProjectPagerAdapter(getSupportFragmentManager()));
+    		mViewPager.setAdapter(new StoryPagerAdapter(getSupportFragmentManager()));
             mViewPager.setOnPageChangeListener(this);
     		
     		final ActionBar actionBar = getSupportActionBar();
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
             actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.tab_title_current)
+                    .setText(R.string.tab_title_story)
                     .setTabListener(this));
             actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.tab_title_backlog)
+                    .setText(R.string.tab_title_tasks)
                     .setTabListener(this));
             actionBar.addTab(actionBar.newTab()
-                    .setText(R.string.tab_title_icebox)
+                    .setText(R.string.tab_title_attachments)
                     .setTabListener(this));
     	} else {
         	// Tablet setup
     		FragmentManager fm = getSupportFragmentManager();
     		FragmentTransaction ft = fm.beginTransaction();
-    		mCurrentListFragment = StoriesListFragment.newInstance(StoriesListFragment.StoryType.CURRENT, projectId);
-    		ft.replace(R.id.fragment_current, mCurrentListFragment);
-    		mBacklogListFragment = StoriesListFragment.newInstance(StoriesListFragment.StoryType.BACKLOG, projectId);
-    		ft.replace(R.id.fragment_backlog, mBacklogListFragment);
-    		mIceboxListFragment = StoriesListFragment.newInstance(StoriesListFragment.StoryType.ICEBOX, projectId);
-    		ft.replace(R.id.fragment_icebox, mIceboxListFragment);
+    		mStoryFragment = StoryFragment.newInstance(projectId, storyId);
+    		ft.replace(R.id.fragment_story, mStoryFragment);
+    		mTasksListFragment = TasksListFragment.newInstance(projectId, storyId);
+    		ft.replace(R.id.fragment_tasks, mTasksListFragment);
+    		mAttachmentsListFragment = AttachmentsListFragment.newInstance(projectId, storyId);
+    		ft.replace(R.id.fragment_attachments, mAttachmentsListFragment);
     		ft.commit();
     	}
 	}
-    
-    
+	
+	
     // ----------------------
  	// Pager Adapter Object
  	// ----------------------
 	
 	/**
-     * DashboardPagerAdapter
+     * StoryPagerAdapter
      * Purpose: 
      * 
      */
-    private class ProjectPagerAdapter extends FragmentPagerAdapter {
+    private class StoryPagerAdapter extends FragmentPagerAdapter {
     	
-        public ProjectPagerAdapter(FragmentManager fm) {
+        public StoryPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -203,11 +181,11 @@ public class ProjectActivity extends BaseActivity implements
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                	 return (mCurrentListFragment = StoriesListFragment.newInstance(StoriesListFragment.StoryType.CURRENT, projectId));
+                	 return (mStoryFragment = StoryFragment.newInstance(projectId, storyId));
                 case 1:
-                	 return (mBacklogListFragment = StoriesListFragment.newInstance(StoriesListFragment.StoryType.BACKLOG, projectId));
+                	 return (mTasksListFragment = TasksListFragment.newInstance(projectId, storyId));
                 case 2:
-                	 return (mIceboxListFragment = StoriesListFragment.newInstance(StoriesListFragment.StoryType.ICEBOX, projectId));
+                	 return (mAttachmentsListFragment = AttachmentsListFragment.newInstance(projectId, storyId));
             }
             return null;
         }

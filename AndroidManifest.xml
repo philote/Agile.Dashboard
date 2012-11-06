@@ -23,6 +23,12 @@
             </intent-filter>
         </activity>
         
+		<activity 
+		    android:name="com.josephhopson.agiledashboard.ProjectActivity" 
+		    android:label="@string/title_activity_project">
+		    
+		</activity>
+		
 		<provider
 			android:name="com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceProvider"
 			android:authorities="com.josephhopson.pivotal.tracker.service"
@@ -33,6 +39,7 @@
 		<service android:name="com.josephhopson.agiledashboard.service.projects.ProjectsIntentService"></service>
 		<service android:name="com.josephhopson.agiledashboard.service.recentactivity.RecentActivityIntentService"></service>
 		<service android:name="com.josephhopson.agiledashboard.service.authentication.AuthenticationIntentService"></service>
+		
 		
     </application>
 </manifest>

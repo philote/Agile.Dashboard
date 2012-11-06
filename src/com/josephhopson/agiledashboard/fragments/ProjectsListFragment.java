@@ -81,6 +81,8 @@ public class ProjectsListFragment extends SherlockListFragment
         String token = mSharedPreferences.getString(AgileDashboardServiceConstants.TOKEN_PREF_KEY, "");
         if(!TextUtils.isEmpty(token)) {
         	getLoaderManager().initLoader(0, null, this);
+        } else {
+        	// TODO Error
         }
 	}
 	
