@@ -134,16 +134,18 @@ public class StoriesListFragment extends SherlockListFragment
 		mStoriesListAdapter.getCursor().moveToPosition(position);
 		String storyId = mStoriesListAdapter.getCursor().getString(
 				mStoriesListAdapter.getCursor().getColumnIndex(Stories.STORY_ID));
+		String projectId = mStoriesListAdapter.getCursor().getString(
+				mStoriesListAdapter.getCursor().getColumnIndex(Stories.STORY_PROJECT_ID));
 		intent.putExtra(StoryActivity.STORY_ID_KEY, storyId);
+		intent.putExtra(StoryActivity.STORY_PROJECT_ID_KEY, projectId);
 		startActivity(intent);
 	}
 	
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle bundle) {
-		// TODO add type to the selection
 		CursorLoader cursorLoaderData = new CursorLoader(
 				getActivity().getApplicationContext(), 
-				Stories.CONTENT_URI, 
+				Stories.buildAllStoriesUri(getArguments().getString(STORIES_PROJECT_ID_KEY)), 
 				null, null, null, null);
 		return cursorLoaderData;
 	}

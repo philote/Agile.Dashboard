@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.josephhopson.agiledashboard.service.AgileDashboardServiceConstants;
+import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.Stories;
 
 /**
  * StoryFragment.java
@@ -56,25 +58,22 @@ public class StoryFragment extends SherlockFragment
 	
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle bundle) {
-		/*
 		 CursorLoader cursorLoaderData = new CursorLoader(
 				getActivity().getApplicationContext(), 
-				Stories.CONTENT_URI, 
+				Stories.buildStoryUri(getArguments().getString(PROJECT_ID), getArguments().getString(STORY_ID)), 
 				null, null, null, null);
 		return cursorLoaderData;
-		 */
-		return null;
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-		// TODO Auto-generated method stub
+		// TODO refresh view
 		
 	}
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
-		// TODO Auto-generated method stub
+		// TODO error?
 		
 	}
 
