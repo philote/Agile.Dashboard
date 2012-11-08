@@ -39,6 +39,7 @@
 		<service android:name="com.josephhopson.agiledashboard.service.projects.ProjectsIntentService"></service>
 		<service android:name="com.josephhopson.agiledashboard.service.recentactivity.RecentActivityIntentService"></service>
 		<service android:name="com.josephhopson.agiledashboard.service.authentication.AuthenticationIntentService"></service>
+		<service android:name="com.josephhopson.agiledashboard.service.stories.StoriesIntentService"></service>
 		
 		
     </application>
