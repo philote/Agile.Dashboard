@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
-    
-    <TextView android:id="@+id/projectName"
-        android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:text="@string/project_name"
-		android:textStyle="bold" />
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp" >
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/projectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/project_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lastactivitylabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/projectName"
+        android:layout_marginRight="4dp"
+        android:text="Last Activity: "
+        android:textColor="#666" />
+
+    <TextView
+        android:id="@+id/lastactivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/lastactivitylabel"
+        android:layout_alignBottom="@id/lastactivitylabel"
+        android:layout_toRightOf="@id/lastactivitylabel"
+        android:text="Unknown"
+        android:textColor="@android:color/black" />
+    
+</RelativeLayout>

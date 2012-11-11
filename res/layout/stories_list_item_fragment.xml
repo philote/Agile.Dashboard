@@ -1,13 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp" >
     
-    <TextView android:id="@+id/storyName"
+    <TextView
+        android:id="@+id/storyName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:text="@string/story_name"
-		android:textStyle="bold" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/story_name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/ownedbylabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/storyName"
+        android:paddingRight="4dp"
+        android:text="Owned By: "
+        android:textColor="#666" />
+    <TextView
+        android:id="@+id/ownedby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ownedbylabel"
+        android:layout_alignBottom="@+id/ownedbylabel"
+        android:layout_toRightOf="@+id/ownedbylabel"
+        android:text="Unknown" />
+	
+	<TextView
+	    android:id="@+id/currentstatelabel"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/ownedbylabel"
+	    android:paddingRight="4dp"
+	    android:text="Current State: "
+	    android:textColor="#666" />
+    <TextView
+        android:id="@+id/currentstate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/currentstatelabel"
+        android:layout_alignBottom="@+id/currentstatelabel"
+        android:layout_toRightOf="@+id/currentstatelabel"
+        android:text="Unknown" />
+    
+    <TextView
+        android:id="@+id/estimatelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/currentstatelabel"
+        android:paddingRight="4dp"
+        android:text="Estimate: "
+        android:textColor="#666" />
+    <TextView
+        android:id="@+id/estimate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/estimatelabel"
+        android:layout_alignBottom="@+id/estimatelabel"
+        android:layout_toRightOf="@+id/estimatelabel"
+        android:text="Unknown" />
+    
+    <TextView
+        android:id="@+id/storytypelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/estimatelabel"
+        android:paddingRight="4dp"
+        android:text="Type: "
+        android:textColor="#666" />
+    <TextView
+        android:id="@+id/storytype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/storytypelabel"
+        android:layout_alignBottom="@+id/storytypelabel"
+        android:layout_toRightOf="@+id/storytypelabel"
+        android:text="Unknown" />
+    
+    <TextView
+        android:id="@+id/storylabelslabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/storytypelabel"
+        android:paddingRight="4dp"
+        android:text="Labels: "
+        android:textColor="#666" />
+    <TextView
+        android:id="@+id/storylabels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/storylabelslabel"
+        android:layout_alignBottom="@+id/storylabelslabel"
+        android:layout_toRightOf="@+id/storylabelslabel"
+        android:text="Unknown" />
+    
+</RelativeLayout>

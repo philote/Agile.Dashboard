@@ -1,13 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
-    
-    <TextView android:id="@+id/activityDescription"
-        android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:text="@string/activity_description"
-		android:textStyle="bold" />
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp" >
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/activityProjectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="4dp"
+        android:text="Project Name"
+        android:textColor="#327A9F"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/activityDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/activityProjectName"
+        android:text="@string/activity_description"
+        android:textColor="#666"
+        android:textStyle="normal" />
+    
+    <TextView
+        android:id="@+id/activityDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:text="Date"
+        android:textColor="#666"
+        android:textStyle="normal" />
+    
+</RelativeLayout>

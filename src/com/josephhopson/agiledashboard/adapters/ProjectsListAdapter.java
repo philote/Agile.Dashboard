@@ -54,15 +54,25 @@ public class ProjectsListAdapter extends CursorAdapter {
 	
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
-		TextView nameTextView = (TextView) view.findViewById(R.id.projectName);
 		
-		String name  = cursor.getString(
+		TextView nameTextView = (TextView) view.findViewById(R.id.projectName);
+		String name = cursor.getString(
 				cursor.getColumnIndex(Projects.PROJECT_NAME));
 		if(!TextUtils.isEmpty(name)) {
 			nameTextView.setText(name);
 		} else {
 			// reset
 			nameTextView.setText(context.getString(R.string.project_name));
+		}
+		
+		TextView lastactivityTextView = (TextView) view.findViewById(R.id.lastactivity);
+		String lastactivity = cursor.getString(
+				cursor.getColumnIndex(Projects.PROJECT_LAST_ACTIVITY_AT));
+		if(!TextUtils.isEmpty(lastactivity)) {
+			lastactivityTextView.setText(lastactivity);
+		} else {
+			// reset
+			lastactivityTextView.setText("");
 		}
 	}
 	

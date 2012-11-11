@@ -28,15 +28,63 @@ public class StoriesListAdapter extends CursorAdapter {
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
 		TextView nameTextView = (TextView) view.findViewById(R.id.storyName);
-		
 		String name  = cursor.getString(
 				cursor.getColumnIndex(Stories.STORY_NAME));
-		
 		if(!TextUtils.isEmpty(name)) {
 			nameTextView.setText(name);
 		} else {
 			// reset
 			nameTextView.setText(context.getString(R.string.story_name));
+		}
+		
+		TextView ownedbyTextView = (TextView) view.findViewById(R.id.ownedby);
+		String ownedby  = cursor.getString(
+				cursor.getColumnIndex(Stories.STORY_OWNED_BY));
+		if(!TextUtils.isEmpty(ownedby)) {
+			ownedbyTextView.setText(ownedby);
+		} else {
+			// reset
+			ownedbyTextView.setText("");
+		}
+		
+		TextView currentstateTextView = (TextView) view.findViewById(R.id.currentstate);
+		String currentstate  = cursor.getString(
+				cursor.getColumnIndex(Stories.STORY_CURRENT_STATE));
+		if(!TextUtils.isEmpty(currentstate)) {
+			currentstateTextView.setText(currentstate);
+		} else {
+			// reset
+			currentstateTextView.setText("");
+		}
+		
+		TextView estimateTextView = (TextView) view.findViewById(R.id.estimate);
+		String estimate  = cursor.getString(
+				cursor.getColumnIndex(Stories.STORY_ESTIMATE));
+		if(!TextUtils.isEmpty(estimate)) {
+			estimateTextView.setText(estimate);
+		} else {
+			// reset
+			estimateTextView.setText("");
+		}
+		
+		TextView storytypeTextView = (TextView) view.findViewById(R.id.storytype);
+		String storytype  = cursor.getString(
+				cursor.getColumnIndex(Stories.STORY_TYPE));
+		if(!TextUtils.isEmpty(storytype)) {
+			storytypeTextView.setText(storytype);
+		} else {
+			// reset
+			storytypeTextView.setText("");
+		}
+		
+		TextView storylabelsTextView = (TextView) view.findViewById(R.id.storylabels);
+		String storylabels = cursor.getString(
+				cursor.getColumnIndex(Stories.STORY_LABELS));
+		if(!TextUtils.isEmpty(storylabels)) {
+			storylabelsTextView.setText(storylabels);
+		} else {
+			// reset
+			storylabelsTextView.setText(context.getString(R.string.story_name));
 		}
 	}
 	

@@ -3,69 +3,158 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/storylayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp" >
+		
         <TextView
             android:id="@+id/storyname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+        	android:layout_alignParentTop="true"
             android:text="Story Name"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+		
+        <TextView
+	        android:id="@+id/storytypelabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/storyname"
+	        android:paddingRight="4dp"
+	        android:text="Type: "
+	        android:textColor="#666" />
         <TextView
             android:id="@+id/storytype"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Story Type"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_alignBaseline="@+id/storytypelabel"
+	        android:layout_alignBottom="@+id/storytypelabel"
+	        android:layout_toRightOf="@+id/storytypelabel"
+	        android:text="Unknown" />
+		
+        <TextView
+	        android:id="@+id/storypointslabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/storytypelabel"
+	        android:paddingRight="4dp"
+	        android:text="Points: "
+	        android:textColor="#666" />
         <TextView
             android:id="@+id/storypoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Story Points"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_alignBaseline="@+id/storypointslabel"
+	        android:layout_alignBottom="@+id/storypointslabel"
+	        android:layout_toRightOf="@+id/storypointslabel"
+	        android:text="Unknown" />
+		
+        <TextView
+	        android:id="@+id/storystatelabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/storypointslabel"
+	        android:paddingRight="4dp"
+	        android:text="State: "
+	        android:textColor="#666" />
         <TextView
             android:id="@+id/storystate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Story State"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_alignBaseline="@+id/storystatelabel"
+	        android:layout_alignBottom="@+id/storystatelabel"
+	        android:layout_toRightOf="@+id/storystatelabel"
+	        android:text="Unknown" />
+		
+        <TextView
+	        android:id="@+id/storyrequesterlabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/storystatelabel"
+	        android:paddingRight="4dp"
+	        android:text="Requester: "
+	        android:textColor="#666" />
         <TextView
             android:id="@+id/storyrequester"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Story Requester"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_alignBaseline="@+id/storyrequesterlabel"
+	        android:layout_alignBottom="@+id/storyrequesterlabel"
+	        android:layout_toRightOf="@+id/storyrequesterlabel"
+	        android:text="Unknown" />
+		
+        <TextView
+	        android:id="@+id/storyownerlabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/storyrequesterlabel"
+	        android:paddingRight="4dp"
+	        android:text="Owner: "
+	        android:textColor="#666" />
         <TextView
             android:id="@+id/storyowner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Story Owner"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_alignBaseline="@+id/storyownerlabel"
+	        android:layout_alignBottom="@+id/storyownerlabel"
+	        android:layout_toRightOf="@+id/storyownerlabel"
+	        android:text="Unknown" />
+		
+        <TextView
+	        android:id="@+id/storydescriptionlabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/storyownerlabel"
+	        android:paddingRight="4dp"
+	        android:text="Description: "
+	        android:textColor="#666" />
         <TextView
             android:id="@+id/storydescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Story Description"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_alignBaseline="@+id/storydescriptionlabel"
+	        android:layout_alignBottom="@+id/storydescriptionlabel"
+	        android:layout_toRightOf="@+id/storydescriptionlabel"
+	        android:text="Unknown" />
+		
+        <TextView
+	        android:id="@+id/storylabelslabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/storydescriptionlabel"
+	        android:paddingRight="4dp"
+	        android:text="Labels: "
+	        android:textColor="#666" />
         <TextView
             android:id="@+id/storylabels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Story Labels"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_alignBaseline="@+id/storylabelslabel"
+	        android:layout_alignBottom="@+id/storylabelslabel"
+	        android:layout_toRightOf="@+id/storylabelslabel"
+	        android:text="Unknown" />
 
-    </LinearLayout>
+    </RelativeLayout>
     
-
 </ScrollView>

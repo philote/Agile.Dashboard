@@ -50,9 +50,6 @@ public class ActivitiesListAdapter extends CursorAdapter {
 	
 	private LayoutInflater inflater;
 	
-	// TODO get from string.xml
-	private static final String ACTIVITY_DESCRIPTION = "Activity Description";
-	
 	/**
 	 * @param context
 	 */
@@ -63,16 +60,36 @@ public class ActivitiesListAdapter extends CursorAdapter {
 	
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
-		TextView descriptionTextView = (TextView) view.findViewById(R.id.activityDescription);
 		
+		TextView descriptionTextView = (TextView) view.findViewById(R.id.activityDescription);
 		String description  = cursor.getString(
 				cursor.getColumnIndex(AgileDashboardServiceContract.RecentActivity.ACTIVITY_DESCRIPTION));
-		
 		if(!TextUtils.isEmpty(description)) {
 			descriptionTextView.setText(description);
 		} else {
 			// reset
-			descriptionTextView.setText(ACTIVITY_DESCRIPTION);
+			descriptionTextView.setText("");
+		}
+		
+		TextView dateTextView = (TextView) view.findViewById(R.id.activityDate);
+		String date  = cursor.getString(
+				cursor.getColumnIndex(AgileDashboardServiceContract.RecentActivity.ACTIVITY_OCCURRED_AT));
+		if(!TextUtils.isEmpty(description)) {
+			dateTextView.setText(date);
+		} else {
+			// reset
+			dateTextView.setText("");
+		}
+		
+		TextView ProjectNameTextView = (TextView) view.findViewById(R.id.activityProjectName);
+		// TODO get the actual name
+		String projectName  = cursor.getString(
+				cursor.getColumnIndex(AgileDashboardServiceContract.RecentActivity.ACTIVITY_PROJECT_ID));
+		if(!TextUtils.isEmpty(description)) {
+			ProjectNameTextView.setText(projectName);
+		} else {
+			// reset
+			ProjectNameTextView.setText("Project Name");
 		}
 	}
 	
