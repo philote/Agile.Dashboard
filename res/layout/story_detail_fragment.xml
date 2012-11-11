@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/storylayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/storyname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Story Name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/storytype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Story Type"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/storypoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Story Points"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/storystate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Story State"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/storyrequester"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Story Requester"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/storyowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Story Owner"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/storydescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Story Description"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/storylabels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Story Labels"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </LinearLayout>
+    
+
+</ScrollView>

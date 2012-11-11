@@ -63,31 +63,23 @@ public class ActivitiesListAdapter extends CursorAdapter {
 	
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
-		ViewHolder holder = (ViewHolder)view.getTag();
-		if(holder == null) {
-			holder = new ViewHolder();
-			holder.description = (TextView) view.findViewById(R.id.activityDescription);
-		}
+		TextView descriptionTextView = (TextView) view.findViewById(R.id.activityDescription);
 		
 		String description  = cursor.getString(
 				cursor.getColumnIndex(AgileDashboardServiceContract.RecentActivity.ACTIVITY_DESCRIPTION));
+		
 		if(!TextUtils.isEmpty(description)) {
-			holder.description.setText(description);
+			descriptionTextView.setText(description);
 		} else {
 			// reset
-			holder.description.setText(ACTIVITY_DESCRIPTION);
+			descriptionTextView.setText(ACTIVITY_DESCRIPTION);
 		}
 	}
 	
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-		View view = inflater.inflate(R.layout.activities_list_item, null);
+		View view = inflater.inflate(R.layout.activities_list_item_fragment, null);
 		bindView(view, context, cursor);
 		return view;
 	}
-	
-	class ViewHolder{
-		TextView description;
-	}
-
 }

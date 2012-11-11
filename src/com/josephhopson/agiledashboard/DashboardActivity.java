@@ -164,6 +164,9 @@ public class DashboardActivity extends BaseActivity implements
     		// TODO pop dialog
     	} else {
     		// TODO update fragments
+    		if(mProjectsListFragment == null || mRecentActivityListFragment == null) {
+    			loadFragments();
+    		}
     		mProjectsListFragment.refreshData();
     		mRecentActivityListFragment.refreshData();
     	}

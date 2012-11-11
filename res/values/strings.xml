@@ -5,6 +5,7 @@
     
     <string name="title_activity_dashboard">Dashboard</string>
     <string name="title_activity_project">Project</string>
+    <string name="title_activity_story">Story</string>
     <string name="title_projects_list">Projects</string>
     <string name="title_activity_feed">Recent Activity</string>
     

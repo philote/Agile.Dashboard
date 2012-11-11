@@ -29,6 +29,12 @@
 		    
 		</activity>
 		
+		<activity 
+		    android:name="com.josephhopson.agiledashboard.StoryActivity" 
+		    android:label="@string/title_activity_story">
+		    
+		</activity>
+		
 		<provider
 			android:name="com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceProvider"
 			android:authorities="com.josephhopson.pivotal.tracker.service"
