@@ -41,7 +41,7 @@ public class StoryFragment extends SherlockFragment
 	private TextView storydescription;
 	private TextView storylabels;
 	
-	public static StoryFragment newInstance(String storyId, String projectId) {
+	public static StoryFragment newInstance(String projectId, String storyId) {
 		StoryFragment mStoryFragment = new StoryFragment();
 		
 		Bundle args = new Bundle();
