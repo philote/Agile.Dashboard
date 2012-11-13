@@ -16,7 +16,7 @@
             android:layout_marginLeft="@dimen/multipane_half_padding"
             android:layout_marginTop="@dimen/multipane_half_padding"
             android:layout_marginRight="@dimen/multipane_half_padding"
-            android:text="@string/title_projects_list" />
+            android:text="Current" />
 
         <FrameLayout android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -42,7 +42,7 @@
             android:layout_marginLeft="@dimen/multipane_half_padding"
             android:layout_marginTop="@dimen/multipane_half_padding"
             android:layout_marginRight="@dimen/multipane_half_padding"
-            android:text="@string/title_activity_feed" />
+            android:text="Backlog" />
 
         <FrameLayout android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -68,7 +68,7 @@
             android:layout_marginLeft="@dimen/multipane_half_padding"
             android:layout_marginTop="@dimen/multipane_half_padding"
             android:layout_marginRight="@dimen/multipane_half_padding"
-            android:text="@string/title_activity_feed" />
+            android:text="Icebox" />
 
         <FrameLayout android:layout_width="match_parent"
             android:layout_height="0dp"

@@ -1,5 +1,7 @@
 package com.josephhopson.agiledashboard;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +16,7 @@ import com.josephhopson.agiledashboard.fragments.AttachmentsListFragment;
 import com.josephhopson.agiledashboard.fragments.StoryFragment;
 import com.josephhopson.agiledashboard.fragments.TasksListFragment;
 import com.josephhopson.agiledashboard.service.R;
+import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.Stories;
 import com.josephhopson.analytics.tracking.EasyTracker;
 
 /**
@@ -38,14 +41,26 @@ public class StoryActivity extends BaseActivity implements
 	
 	private String storyId;
 	private String projectId;
+	private String storyName;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project);
+        setContentView(R.layout.activity_story);
         
-        storyId = getIntent().getExtras().getString(STORY_ID_KEY);
+    	storyId = getIntent().getExtras().getString(STORY_ID_KEY);
         projectId = getIntent().getExtras().getString(STORY_PROJECT_ID_KEY);
+        
+        Cursor mCursor = getContentResolver().query(Stories.buildStoryUri(projectId, storyId), null, null, null, null);
+        if(mCursor.moveToFirst()) {
+        	storyName = mCursor.getString(mCursor.getColumnIndex(Stories.STORY_NAME));
+        } else {
+        	storyName = "Unknown";
+        }
+        mCursor.close();
+        
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(storyName);
         
         EasyTracker.getTracker().setContext(this);
         
@@ -69,8 +84,16 @@ public class StoryActivity extends BaseActivity implements
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+    	Intent intent;
         switch (item.getItemId()) {
         	// TODO add menu case's here
+        	case android.R.id.home:
+        		intent = new Intent(this, ProjectActivity.class);
+	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	intent.putExtra(ProjectActivity.PROJECT_ID_KEY, projectId);
+	        	startActivity(intent);
+	        	finish();
+	        	return true;
 //		    case R.id.menu_refresh:
 //		        triggerRefresh();
 //		        return true;

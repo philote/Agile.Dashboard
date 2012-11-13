@@ -27,6 +27,8 @@
  */
 package com.josephhopson.agiledashboard;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -39,6 +41,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.josephhopson.agiledashboard.fragments.StoriesListFragment;
 import com.josephhopson.agiledashboard.service.R;
+import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.Projects;
 import com.josephhopson.analytics.tracking.EasyTracker;
 
 /**
@@ -61,13 +64,25 @@ public class ProjectActivity extends BaseActivity implements
 	private StoriesListFragment mIceboxListFragment;
 	
 	private String projectId;
+	public String projectName;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
         
-        projectId = getIntent().getExtras().getString(PROJECT_ID_KEY);
+	    projectId = getIntent().getExtras().getString(PROJECT_ID_KEY);
+	    
+        Cursor mCursor = getContentResolver().query(Projects.buildProjectUri(projectId), null, null, null, null);
+        if(mCursor.moveToFirst()) {
+        	projectName = mCursor.getString(mCursor.getColumnIndex(Projects.PROJECT_NAME));
+        } else {
+        	projectName = "Unknown";
+        }
+        mCursor.close();
+        
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(projectName);
         
         EasyTracker.getTracker().setContext(this);
         
@@ -91,8 +106,15 @@ public class ProjectActivity extends BaseActivity implements
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+    	Intent intent;
         switch (item.getItemId()) {
         	// TODO add menu case's here
+	        case android.R.id.home:
+	    		intent = new Intent(this, DashboardActivity.class);
+	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        	startActivity(intent);
+	        	finish();
+	        	return true;
 //		    case R.id.menu_refresh:
 //		        triggerRefresh();
 //		        return true;

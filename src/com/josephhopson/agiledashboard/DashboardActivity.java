@@ -71,6 +71,8 @@ public class DashboardActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        
         EasyTracker.getTracker().setContext(this);
         
         SharedPreferences mSharedPreferences = getSharedPreferences(AgileDashboardServiceConstants.TOKEN_PREF, MODE_PRIVATE);

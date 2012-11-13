@@ -134,9 +134,9 @@ public class StoriesListFragment extends SherlockListFragment
 		mStoriesListAdapter.getCursor().moveToPosition(position);
 		String storyId = mStoriesListAdapter.getCursor().getString(
 				mStoriesListAdapter.getCursor().getColumnIndex(Stories.STORY_ID));
+		intent.putExtra(StoryActivity.STORY_ID_KEY, storyId);
 		String projectId = mStoriesListAdapter.getCursor().getString(
 				mStoriesListAdapter.getCursor().getColumnIndex(Stories.STORY_PROJECT_ID));
-		intent.putExtra(StoryActivity.STORY_ID_KEY, storyId);
 		intent.putExtra(StoryActivity.STORY_PROJECT_ID_KEY, projectId);
 		startActivity(intent);
 	}

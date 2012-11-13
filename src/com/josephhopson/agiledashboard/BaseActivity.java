@@ -46,8 +46,6 @@ public class BaseActivity extends SherlockFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EasyTracker.getTracker().setContext(this);
-        
-        getSupportActionBar().setHomeButtonEnabled(true);
 	}
 	
 	@Override
