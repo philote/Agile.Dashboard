@@ -15,7 +15,6 @@ import com.actionbarsherlock.view.MenuItem;
 import com.josephhopson.agiledashboard.fragments.AttachmentsListFragment;
 import com.josephhopson.agiledashboard.fragments.StoryFragment;
 import com.josephhopson.agiledashboard.fragments.TasksListFragment;
-import com.josephhopson.agiledashboard.service.R;
 import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.Stories;
 import com.josephhopson.analytics.tracking.EasyTracker;
 

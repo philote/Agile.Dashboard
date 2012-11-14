@@ -40,7 +40,6 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.josephhopson.agiledashboard.fragments.StoriesListFragment;
-import com.josephhopson.agiledashboard.service.R;
 import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.Projects;
 import com.josephhopson.analytics.tracking.EasyTracker;
 

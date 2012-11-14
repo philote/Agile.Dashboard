@@ -35,7 +35,6 @@ import com.josephhopson.agiledashboard.fragments.RecentActivityListFragment;
 import com.josephhopson.agiledashboard.fragments.SignInDialogFragment;
 import com.josephhopson.agiledashboard.interfaces.OnAuthTokenReceivedListener;
 import com.josephhopson.analytics.tracking.EasyTracker;
-import com.josephhopson.agiledashboard.service.R;
 import com.josephhopson.agiledashboard.service.AgileDashboardServiceConstants;
 
 import android.content.SharedPreferences;
