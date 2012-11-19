@@ -28,7 +28,7 @@
 package com.josephhopson.agiledashboard.adapters;
 
 import com.josephhopson.agiledashboard.R;
-import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract;
+import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.Activities;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -63,7 +63,7 @@ public class ActivitiesListAdapter extends CursorAdapter {
 		
 		TextView descriptionTextView = (TextView) view.findViewById(R.id.activityDescription);
 		String description  = cursor.getString(
-				cursor.getColumnIndex(AgileDashboardServiceContract.RecentActivity.ACTIVITY_DESCRIPTION));
+				cursor.getColumnIndex(Activities.ACTIVITY_DESCRIPTION));
 		if(!TextUtils.isEmpty(description)) {
 			descriptionTextView.setText(description);
 		} else {
@@ -73,7 +73,7 @@ public class ActivitiesListAdapter extends CursorAdapter {
 		
 		TextView dateTextView = (TextView) view.findViewById(R.id.activityDate);
 		String date  = cursor.getString(
-				cursor.getColumnIndex(AgileDashboardServiceContract.RecentActivity.ACTIVITY_OCCURRED_AT));
+				cursor.getColumnIndex(Activities.ACTIVITY_OCCURRED_AT));
 		if(!TextUtils.isEmpty(description)) {
 			dateTextView.setText(date);
 		} else {
@@ -84,7 +84,7 @@ public class ActivitiesListAdapter extends CursorAdapter {
 		TextView ProjectNameTextView = (TextView) view.findViewById(R.id.activityProjectName);
 		// TODO get the actual name
 		String projectName  = cursor.getString(
-				cursor.getColumnIndex(AgileDashboardServiceContract.RecentActivity.ACTIVITY_PROJECT_ID));
+				cursor.getColumnIndex(Activities.ACTIVITY_PROJECT_ID));
 		if(!TextUtils.isEmpty(description)) {
 			ProjectNameTextView.setText(projectName);
 		} else {

@@ -39,7 +39,7 @@ import android.text.TextUtils;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.josephhopson.agiledashboard.adapters.ActivitiesListAdapter;
 import com.josephhopson.agiledashboard.service.AgileDashboardServiceConstants;
-import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.RecentActivity;
+import com.josephhopson.agiledashboard.service.provider.AgileDashboardServiceContract.Activities;;
 
 /**
  * RecentActivityListFragment.java
@@ -82,7 +82,7 @@ public class RecentActivityListFragment extends SherlockListFragment
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle bundle) {
 		CursorLoader cursorLoaderData = new CursorLoader(
 				getActivity().getApplicationContext(), 
-				RecentActivity.CONTENT_URI, 
+				Activities.CONTENT_URI, 
 				null, null, null, null);
 		return cursorLoaderData;
 	}
